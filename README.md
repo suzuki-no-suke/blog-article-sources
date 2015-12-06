@@ -4,3 +4,7 @@
 - Qiita : [suzuki-no-suke](http://qiita.com/suzuki-no-suke)
 
 ## 記事一覧
+
+- Blogger
+- Qiita
+  -
