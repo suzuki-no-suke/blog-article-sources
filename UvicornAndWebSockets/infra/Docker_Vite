@@ -1,0 +1,20 @@
+# Node.js Alpine最小イメージをベースにViteテスト環境を構築
+FROM node:20-alpine
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# # package.jsonとpackage-lock.jsonをコピー（キャッシュ効率化）
+# COPY package*.json ./
+
+# # 依存関係をインストール
+# RUN npm ci
+
+# # アプリケーションのソースコードをコピー
+# COPY . .
+
+# Vite開発サーバーのポートを公開
+EXPOSE 5173
+
+# 開発サーバーを起動（ホスト0.0.0.0で外部アクセス可能に）
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

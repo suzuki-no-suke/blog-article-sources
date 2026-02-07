@@ -1,0 +1,41 @@
+
+
+services:
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_server
+    ports:
+      - "8878:8878"
+    networks:
+      - inner_net
+    volumes:
+      - ../backend:/usr/local/src/python
+    command: >
+      /bin/sh -c 
+      "cd /usr/local/src/python &&
+      uvicorn --host 0.0.0.0 --port 8878 server:app --reload --ws websockets-sansio"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Docker_Vite
+    container_name: vite_frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - inner_net
+    volumes:
+      - ../frontend:/usr/local/src/react
+    command: >
+      /bin/sh -c 
+      "cd /usr/local/src/react &&
+      npm install &&
+      npm run dev -- --host 0.0.0.0"
+
+
+
+networks:
+  inner_net:
+    driver: bridge
